@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+
+actor "Administrador" as Admin
+actor "Atleta" as Atleta
+actor "Organizador" as Organizador
+
+rectangle "Sistema de Gestão das Olimpíadas" {
+    usecase "Cadastrar\nCompetição" as UC1
+    usecase "Inscrever\nAtleta" as UC2
+    usecase "Alocar\nLocal" as UC3
+    usecase "Registrar\nResultados" as UC4
+    usecase "Gerar Relatório\nde Medalhas" as UC5
+    usecase "Consultar\nCompetições" as UC6
+}
+
+Admin --> UC1
+Admin --> UC3
+Admin --> UC4
+Admin --> UC5
+
+Atleta --> UC2
+Atleta --> UC6
+
+Organizador --> UC1
+Organizador --> UC3
+Organizador --> UC4
+
+UC4 .> UC5 : <<include>>
+@enduml
