@@ -1,0 +1,53 @@
+@startuml
+
+skinparam packageStyle folder
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam ArrowThickness 1.5
+
+top to bottom direction
+
+package "Resultados e Relatórios" as PR {
+    class Resultado
+}
+
+package "Gerenciamento de Competições" as PC {
+    class Competicao
+    class Local
+}
+
+package "Gerenciamento de Atletas" as PA {
+    class Atleta
+    class Pais
+    class Inscricao
+}
+
+package "Compartilhado (Fundação)" as PF {
+    class Usuario
+    class Notificacao
+    class Auditoria
+}
+
+package "Infraestrutura" as PI {
+    class Persistencia
+    class Configuracao
+}
+
+' =========================
+' Dependências principais
+' =========================
+
+PR ..down..> PC
+PR ..down..> PA
+
+PA ..left..> PC
+
+PI ..up..> PF
+
+PF ..up..> PC
+PF ..up..> PA
+
+PI ..left..> PC
+PI ..right..> PA
+
+@enduml
