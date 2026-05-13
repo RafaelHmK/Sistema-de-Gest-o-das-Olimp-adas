@@ -1,0 +1,61 @@
+@startuml
+
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam ArrowThickness 1.5
+
+top to bottom direction
+
+node "Dispositivo do Usuário" {
+
+    artifact "Navegador Web\n(Chrome, Edge, Firefox)" as Browser
+
+}
+
+cloud "Internet" as Internet
+
+node "Servidor Web" {
+
+    artifact "Frontend SGO\nHTML/CSS/JavaScript" as Frontend
+
+}
+
+node "Servidor de Aplicação" {
+
+    component "API SGO" as API
+
+    component "Módulo de\nCompetições" as Comp
+
+    component "Módulo de\nInscrições" as Insc
+
+    component "Módulo de\nAlocação" as Aloc
+
+    component "Módulo de\nResultados" as Result
+
+    component "Módulo de\nRelatórios" as Relat
+}
+
+database "Servidor Banco de Dados\nPostgreSQL / MySQL" as DB
+
+' ==========================
+' Comunicação
+' ==========================
+
+Browser --> Internet
+Internet --> Frontend
+
+Frontend --> API : HTTPS / REST
+
+API --> Comp
+API --> Insc
+API --> Aloc
+API --> Result
+API --> Relat
+
+Comp --> DB
+Insc --> DB
+Aloc --> DB
+Result --> DB
+Relat --> DB
+
+@enduml
