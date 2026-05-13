@@ -1,0 +1,57 @@
+@startuml
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam ArrowThickness 1.5
+
+left to right direction
+
+package "Sistema SGO" {
+
+    component "Interface Web" as UI
+
+    component "Módulo de\nCompetições" as Comp
+    component "Módulo de\nInscrições" as Insc
+    component "Módulo de\nAlocação de Locais" as Aloc
+    component "Módulo de\nResultados" as Result
+    component "Módulo de\nRelatórios" as Relat
+
+    database "Banco de Dados\nSGO_DB" as DB
+}
+
+' ======================
+' Fluxo principal
+' ======================
+
+UI --> Comp
+UI --> Insc
+UI --> Aloc
+UI --> Result
+UI --> Relat
+
+' ======================
+' Integrações internas
+' ======================
+
+Insc --> Comp : consulta\ncompetições
+
+Aloc --> Comp : valida\nhorários
+
+Result --> Comp : obtém\ncompetição
+
+Result --> Insc : obtém\natletas inscritos
+
+Relat --> Result : gera\nmedalhas
+
+' ======================
+' Banco de dados
+' ======================
+
+Comp --> DB
+Insc --> DB
+Aloc --> DB
+Result --> DB
+Relat --> DB
+
+@enduml
