@@ -1,0 +1,57 @@
+@startuml
+
+class Competicao {
+    - id: int
+    - modalidade: String
+    - data: Date
+    - horario: String
+    + cadastrarCompeticao()
+    + adicionarAtleta()
+}
+
+class Atleta {
+    - id: int
+    - nome: String
+    - idade: int
+    - genero: String
+    + inscreverCompeticao()
+}
+
+class Pais {
+    - id: int
+    - nome: String
+    - qtdOuro: int
+    - qtdPrata: int
+    - qtdBronze: int
+    + gerarRelatorio()
+}
+
+class Local {
+    - id: int
+    - nome: String
+    - endereco: String
+    - capacidade: int
+    + verificarDisponibilidade()
+}
+
+class Resultado {
+    - id: int
+    - ouro: String
+    - prata: String
+    - bronze: String
+    + registrarResultado()
+}
+
+class Inscricao {
+    - id: int
+    - dataInscricao: Date
+    + confirmarInscricao()
+}
+
+Pais "1" -- "*" Atleta : representa
+Competicao "1" -- "1" Local : ocorre em
+Competicao "1" -- "1" Resultado : possui
+Competicao "1" -- "*" Inscricao
+Atleta "1" -- "*" Inscricao
+
+@enduml
